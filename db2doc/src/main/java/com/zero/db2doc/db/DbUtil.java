@@ -35,8 +35,9 @@ public class DbUtil {
             while (tableResultSet.next()) {
                 tables.add(tableResultSet.getString("TABLE_NAME"));
             }
-            consoleInfo(tableList);// 输出所有表信息
+            // consoleInfo(tables);// 输出所有表信息
             for (String tableName : tables) {
+                log.info("开始解析表:{}", tableName);
                 try {
                     if (!StringUtils.isNullOrEmpty(tableName)) {
                         ResultSet rs = dbmd.getColumns(null, "%", tableName, "%");
@@ -59,15 +60,15 @@ public class DbUtil {
                 }
             }
         } catch (Exception e) {
-            log.error("获取数据库表信息失败>>> + ", e);
+            log.error("获取数据库表信息失败", e);
         }
         log.info("获取表格结构成功...");
         return tableList;
     }
 
-    private static void consoleInfo(List<DbTable> tableList) {
-        for (DbTable table : tableList) {
-            log.debug("表名：" + table.getTitle());
+    private static void consoleInfo(List<String> tables) {
+        for (String table : tables) {
+            log.info("表名：{}", table);
         }
     }
 }
