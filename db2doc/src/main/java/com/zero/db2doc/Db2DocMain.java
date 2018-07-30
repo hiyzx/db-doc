@@ -22,12 +22,12 @@ public class Db2DocMain {
         String EXPORT_FILE_PATH = "C:\\Users\\Administrator\\Desktop\\数据库文档-%s.doc";
         String schemaPattern = "%";
         String tableNamePattern = "%";
-        DatabaseMetaData dbmd = getMySQLDatabaseMetaData();
-        // DatabaseMetaData dbmd = getOracleDatabaseMetaData();
+        DatabaseMetaData databaseMetaData = getMySQLDatabaseMetaData();
+        // DatabaseMetaData databaseMetaData = getOracleDatabaseMetaData();
 
         long startTime = System.currentTimeMillis();
         log.info("starting to export mysql table info....");
-        List<DbTable> tableList = DbUtil.initTableInfos(dbmd, schemaPattern, tableNamePattern);
+        List<DbTable> tableList = DbUtil.initTableInfos(databaseMetaData, schemaPattern, tableNamePattern);
         WordUtil wordKit = new WordUtil();
         wordKit.writeTableToWord(tableList,
                 String.format(EXPORT_FILE_PATH, new SimpleDateFormat("yyyyMMddHHmmss").format(new Date())));
