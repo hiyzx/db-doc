@@ -30,7 +30,6 @@ public class DbUtil {
         List<DbTable> tableList = new ArrayList<>();
         try {
             ResultSet tableResultSet = dbmd.getTables(null, schemaPattern, tableNamePattern, new String[] { "TABLE" });// 表数据集
-            DbTable dbTable = null;
             ArrayList<String> tables = new ArrayList<>();
             while (tableResultSet.next()) {
                 tables.add(tableResultSet.getString("TABLE_NAME"));
@@ -41,7 +40,7 @@ public class DbUtil {
                 try {
                     if (!StringUtils.isNullOrEmpty(tableName)) {
                         ResultSet rs = dbmd.getColumns(null, "%", tableName, "%");
-                        dbTable = new DbTable(tableName, tableName);
+                        DbTable dbTable = new DbTable(tableName, tableName);
                         while (rs.next()) {
                             for (String fieldName : tableRelation.keySet()) {
                                 try {

@@ -26,19 +26,15 @@ public class DbTable {
     // 添加单个字段内容
     private int cursor = 0;
 
-    public void addSingleField(String fieldValue) {
-        if (cursor == fieldCount) {
+    void addSingleField(String fieldValue) {
+        if (cursor == 0) {
+            fieldValues = new String[fieldCount];
             addRowField(fieldValues);
-            fieldValues = new String[fieldCount];
-            cursor = 0;
         }
-        if (fieldValues == null || fieldValues.length <= 0) {
-            fieldValues = new String[fieldCount];
-            fieldValues[cursor] = fieldValue;
-            cursor += 1;
-        } else {
-            fieldValues[cursor] = fieldValue;
-            cursor += 1;
+        fieldValues[cursor] = fieldValue;
+        cursor += 1;
+        if (cursor == fieldCount) {
+            cursor = 0;
         }
     }
 
