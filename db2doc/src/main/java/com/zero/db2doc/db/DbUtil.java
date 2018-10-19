@@ -30,17 +30,17 @@ public class DbUtil {
         List<DbTable> tableList = new ArrayList<>();
         try {
             ResultSet tableResultSet = dbmd.getTables(null, schemaPattern, tableNamePattern, new String[] { "TABLE" });// 表数据集
-            ArrayList<String> tables = new ArrayList<>();
+            List<DbTable> tables = new ArrayList<>();
             while (tableResultSet.next()) {
-                tables.add(tableResultSet.getString("TABLE_NAME"));
+                tables.add(new DbTable(tableResultSet.getString("REMARKS"), tableResultSet.getString("TABLE_NAME")));
             }
             // consoleInfo(tables);// 输出所有表信息
-            for (String tableName : tables) {
+            for (DbTable dbTable : tables) {
+                String tableName = dbTable.getTableName();
                 log.info("开始解析表:{}", tableName);
                 try {
                     if (!StringUtils.isNullOrEmpty(tableName)) {
                         ResultSet rs = dbmd.getColumns(null, "%", tableName, "%");
-                        DbTable dbTable = new DbTable(tableName, tableName);
                         while (rs.next()) {
                             for (String fieldName : tableRelation.keySet()) {
                                 try {

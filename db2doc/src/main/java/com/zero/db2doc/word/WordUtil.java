@@ -19,7 +19,7 @@ public class WordUtil extends WordConfig {
         for (DbTable dbTable : tableList) {
             if (TITLE_ADD_INDEX) {
                 int index = tableList.indexOf(dbTable) + 1;
-                dbTable.setTitle(index + ". " + dbTable.getTitle());
+                dbTable.setTitle(String.format("%s. %s（%s）", index, dbTable.getTableName(), dbTable.getTitle()));
             }
             createSimpleTableNormal(dbTable);
         }
