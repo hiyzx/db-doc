@@ -1,4 +1,4 @@
-package com.zero.db2doc.db;
+package org.zero.db2doc.db;
 
 import lombok.Data;
 

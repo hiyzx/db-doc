@@ -1,7 +1,7 @@
-package com.zero.db2doc.word;
+package org.zero.db2doc.word;
 
-import com.zero.db2doc.db.DbTable;
-import com.zero.db2doc.db.DbUtil;
+import org.zero.db2doc.db.DbTable;
+import org.zero.db2doc.db.DbUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.xwpf.usermodel.*;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.*;

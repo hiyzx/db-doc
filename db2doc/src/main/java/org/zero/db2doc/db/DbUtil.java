@@ -1,4 +1,4 @@
-package com.zero.db2doc.db;
+package org.zero.db2doc.db;
 
 import com.mysql.jdbc.StringUtils;
 import lombok.extern.slf4j.Slf4j;

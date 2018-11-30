@@ -1,5 +1,6 @@
-package com.zero.db2doc.db;
+package org.zero.db2doc.db;
 
+import org.zero.db2doc.enums.DbTypeEnum;
 import lombok.extern.slf4j.Slf4j;
 
 import java.sql.Connection;
@@ -9,6 +10,16 @@ import java.util.Properties;
 
 @Slf4j
 public abstract class DbConfig {
+
+    public static DatabaseMetaData geDatabaseMetaData(String url, DbTypeEnum typeEnum, String user, String password) {
+        String driverName = "";
+        if (DbTypeEnum.ORACLE.equals(typeEnum)) {
+            driverName = "oracle.jdbc.driver.OracleDriver";
+        } else {
+            driverName = "com.mysql.jdbc.Driver";
+        }
+        return DbConfig.getDatabaseMetaData(driverName, url, user, password);
+    }
 
     public static DatabaseMetaData getDatabaseMetaData(String driverName, String url, String user, String password) {
         DatabaseMetaData databaseMetaData = null;

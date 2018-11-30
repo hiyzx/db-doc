@@ -1,4 +1,4 @@
-package com.zero.db2doc.word;
+package org.zero.db2doc.word;
 
 import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
 
