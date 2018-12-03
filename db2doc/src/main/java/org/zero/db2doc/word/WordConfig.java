@@ -8,7 +8,7 @@ public abstract class WordConfig {
     final String FIRST_ROW_COLOR = "C3BED4";// 表格第一行背景色
     final boolean IS_FIRST_ROW_COLOR = false;// 是否显示表格背景色
     final int FIRST_ROW_HEIGHT = 450;// 表格第一行高度
-    final int FIRST_ROW_CEL_WIDTH = 2000;// 表格第一行中单元格的宽度
+    final int FIRST_ROW_CEL_WIDTH = 1500;// 表格第一行中单元格的宽度
     final int FIRST_ROW_FONT_SIZE = 11;// 单元格中文字大小
     final String FIRST_ROW_FONT_FAMILY = "黑体";// 单元格中文字字体
     final boolean FIRST_ROW_FONT_BOLD = true;// 单元格中文字是否加粗
@@ -19,7 +19,7 @@ public abstract class WordConfig {
     final String ROW_COLOR = "EEEEFF";// （除了第一行外）表格内容行背景色
     final boolean IS_ROW_COLOR = true;// 是否显示表格背景色
     final int ROW_HEIGHT = 380;// 表格内容行高度
-    final int ROW_CEL_WIDTH = 2000;// 表格内容行中单元格的宽度
+    final int ROW_CEL_WIDTH = 1500;// 表格内容行中单元格的宽度
     final int ROW_FONT_SIZE = 10;// 单元格中文字大小
     final String ROW_FONT_FAMILY = "楷体";// 单元格中文字字体
     final boolean ROW_FONT_BOLD = false;// 单元格中文字是否加粗

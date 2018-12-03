@@ -16,9 +16,11 @@ public class DbUtil {
     LinkedHashMap<String, String>() {
         {
             this.put("COLUMN_NAME", "字段名称");
+            this.put("IS_KEY", "是否为主键");
             this.put("TYPE_NAME", "字段类型");
             this.put("COLUMN_DEF", "默认值");
             this.put("COLUMN_SIZE", "字段长度");
+            this.put("IS_NULLABLE", "能否为空");
             this.put("REMARKS", "备注信息");
         }
     };
@@ -40,14 +42,36 @@ public class DbUtil {
                 log.info("开始解析表:{}", tableName);
                 try {
                     if (!StringUtils.isNullOrEmpty(tableName)) {
+                        String primaryKeyColumn = "";
+                        ResultSet primaryKeyRs = dbmd.getPrimaryKeys(null, null, tableName);
+                        while (primaryKeyRs.next()) {
+                            // System.out.println("****** Comment ******");
+                            // System.out.println("TABLE_CAT : " + primaryKeyRs.getObject(1));
+                            // System.out.println("TABLE_SCHEM: " + primaryKeyRs.getObject(2));
+                            // System.out.println("TABLE_NAME : " + primaryKeyRs.getObject(3));
+                            // System.out.println("COLUMN_NAME: " + primaryKeyRs.getObject(4));
+                            // System.out.println("KEY_SEQ : " + primaryKeyRs.getObject(5));
+                            // System.out.println("PK_NAME : " + primaryKeyRs.getObject(6));
+                            // System.out.println("****** ******* ******");
+                            primaryKeyColumn = (String) primaryKeyRs.getObject(4);
+                        }
                         ResultSet rs = dbmd.getColumns(null, "%", tableName, "%");
                         while (rs.next()) {
                             for (String fieldName : tableRelation.keySet()) {
-                                try {
-                                    String fieldValue = rs.getString(fieldName);
-                                    dbTable.addSingleField(fieldValue);
-                                } catch (Exception e) {
-                                    dbTable.addSingleField("");
+                                if (!"IS_KEY".equals(fieldName)) {
+                                    try {
+                                        String fieldValue = rs.getString(fieldName);
+                                        dbTable.addSingleField(fieldValue);
+                                        if ("COLUMN_NAME".equals(fieldName)) {
+                                            if (primaryKeyColumn.equals(fieldValue)) {
+                                                dbTable.addSingleField("YES");
+                                            } else {
+                                                dbTable.addSingleField("");
+                                            }
+                                        }
+                                    } catch (Exception e) {
+                                        dbTable.addSingleField("");
+                                    }
                                 }
                             }
 
