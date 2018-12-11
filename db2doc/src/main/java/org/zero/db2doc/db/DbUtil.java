@@ -55,7 +55,7 @@ public class DbUtil {
                             // System.out.println("****** ******* ******");
                             primaryKeyColumn = (String) primaryKeyRs.getObject(4);
                         }
-                        ResultSet rs = dbmd.getColumns(null, "%", tableName, "%");
+                        ResultSet rs = dbmd.getColumns(null, schemaPattern, tableName, "%");
                         while (rs.next()) {
                             for (String fieldName : tableRelation.keySet()) {
                                 if (!"IS_KEY".equals(fieldName)) {
