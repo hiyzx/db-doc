@@ -32,6 +32,7 @@ public class Db2DocMain {
 
     // MYSQL修改以下配置
     private static DatabaseMetaData getMySQLDatabaseMetaData() {
+        // 设置useInformationSchema=true才能获取表的注释
         String url = "jdbc:mysql://ip:port/数据库名?useUnicode=true&characterEncoding=UTF-8";
         String driverName = "com.mysql.jdbc.Driver";
         String user = "账号";
